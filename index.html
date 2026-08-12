@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Palani Pani Poori — fresh, hygienic and irresistible street-style snacks in Chennai.">
+<title>PALANI PANI POORI | Fresh. Spicy. Irresistible.</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+
+<style>
+:root{
+  --green:#29472f;
+  --green-2:#3d623f;
+  --cream:#fffaf0;
+  --orange:#f28a22;
+  --orange-2:#ffb347;
+  --brown:#5b3a24;
+  --ink:#1d261e;
+  --muted:#6d746c;
+  --white:#fff;
+  --line:rgba(41,71,47,.12);
+  --shadow:0 20px 60px rgba(44,35,20,.12);
+  --radius:24px;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  font-family:"DM Sans",sans-serif;
+  color:var(--ink);
+  background:var(--cream);
+  line-height:1.6;
+  overflow-x:hidden;
+}
+img{max-width:100%;display:block}
+a{text-decoration:none;color:inherit}
+button{font:inherit}
+.container{width:min(1180px,92%);margin:auto}
+
+/* NAV */
+.nav{
+  position:fixed;top:0;left:0;width:100%;z-index:1000;
+  padding:16px 0;
+  background:rgba(255,250,240,.78);
+  backdrop-filter:blur(18px);
+  border-bottom:1px solid rgba(41,71,47,.08);
+  transition:.3s;
+}
+.nav.scrolled{box-shadow:0 10px 35px rgba(0,0,0,.08)}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;gap:25px}
+.logo{display:flex;align-items:center;gap:10px;font-weight:800;color:var(--green)}
+.logo-mark{
+  width:44px;height:44px;border-radius:50%;display:grid;place-items:center;
+  color:#fff;background:var(--green);box-shadow:0 8px 20px rgba(41,71,47,.22)
+}
+.logo span{font-size:19px;letter-spacing:.4px}
+.nav-links{display:flex;align-items:center;gap:28px}
+.nav-links a{font-weight:600;font-size:14px;color:#39423a;position:relative}
+.nav-links a:after{
+  content:"";position:absolute;left:0;bottom:-7px;width:0;height:2px;
+  background:var(--orange);transition:.25s
+}
+.nav-links a:hover:after{width:100%}
+.nav-cta,.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:9px;
+  border:0;cursor:pointer;font-weight:700;border-radius:999px;transition:.25s
+}
+.nav-cta{padding:11px 18px;background:var(--orange);color:#fff}
+.nav-cta:hover,.btn:hover{transform:translateY(-2px);box-shadow:0 12px 28px rgba(242,138,34,.25)}
+.menu-toggle{display:none;background:none;border:0;font-size:25px;color:var(--green)}
+
+/* HERO */
+.hero{
+  min-height:100vh;padding:150px 0 90px;display:flex;align-items:center;
+  background:
+    radial-gradient(circle at 10% 15%,rgba(255,179,71,.20),transparent 28%),
+    radial-gradient(circle at 90% 80%,rgba(41,71,47,.14),transparent 28%),
+    var(--cream);
+}
+.hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:70px;align-items:center}
+.kicker{
+  display:inline-flex;align-items:center;gap:9px;padding:8px 13px;border-radius:999px;
+  background:#eef3e8;color:var(--green);font-size:13px;font-weight:800;letter-spacing:.5px;
+  text-transform:uppercase;margin-bottom:18px
+}
+.hero h1{
+  font-family:"Playfair Display",serif;font-size:clamp(48px,6.2vw,82px);
+  line-height:1.02;letter-spacing:-2px;color:var(--green);max-width:720px
+}
+.hero h1 em{color:var(--orange);font-style:normal}
+.hero-copy{font-size:18px;color:var(--muted);max-width:600px;margin:23px 0 30px}
+.hero-actions{display:flex;gap:13px;flex-wrap:wrap}
+.btn{padding:14px 22px}
+.btn-primary{background:var(--green);color:#fff}
+.btn-secondary{background:#fff;color:var(--green);border:1px solid var(--line)}
+.hero-trust{display:flex;gap:25px;flex-wrap:wrap;margin-top:30px;color:var(--muted);font-size:13px;font-weight:700}
+.hero-trust span{display:flex;align-items:center;gap:8px}
+.hero-trust i{color:var(--orange)}
+
+.hero-visual{position:relative}
+.hero-photo{
+  height:570px;border-radius:38px;overflow:hidden;box-shadow:var(--shadow);
+  transform:rotate(1.5deg);border:10px solid rgba(255,255,255,.7)
+}
+.hero-photo img{width:100%;height:100%;object-fit:cover}
+.hero-badge{
+  position:absolute;left:-28px;bottom:35px;width:170px;height:170px;border-radius:50%;
+  display:grid;place-items:center;text-align:center;padding:22px;
+  background:var(--green);color:#fff;border:8px solid var(--cream);
+  box-shadow:0 18px 45px rgba(41,71,47,.25);font-weight:800
+}
+.hero-badge strong{font-size:27px;display:block;color:#ffd26b}
+.hero-badge small{font-size:12px}
+
+/* SECTION */
+section{padding:105px 0}
+.section-head{display:flex;align-items:end;justify-content:space-between;gap:25px;margin-bottom:45px}
+.eyebrow{color:var(--orange);font-size:13px;font-weight:900;text-transform:uppercase;letter-spacing:1.6px}
+.section-title{font-family:"Playfair Display",serif;color:var(--green);font-size:clamp(36px,4.4vw,58px);line-height:1.1;margin-top:7px}
+.section-sub{max-width:520px;color:var(--muted)}
+
+/* MENU */
+.menu-section{background:#f4f6ed}
+.menu-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:22px}
+.card{
+  background:#fff;border:1px solid var(--line);border-radius:var(--radius);
+  overflow:hidden;box-shadow:0 12px 35px rgba(35,45,31,.07);transition:.3s
+}
+.card:hover{transform:translateY(-7px);box-shadow:0 22px 50px rgba(35,45,31,.13)}
+.food-img{height:245px;position:relative;overflow:hidden;background:#eee}
+.food-img img{width:100%;height:100%;object-fit:cover;transition:.5s}
+.card:hover .food-img img{transform:scale(1.06)}
+.tag{
+  position:absolute;top:15px;left:15px;background:#fff;color:var(--green);
+  padding:7px 11px;border-radius:999px;font-size:11px;font-weight:900;
+  box-shadow:0 8px 20px rgba(0,0,0,.12)
+}
+.card-body{padding:22px}
+.card h3{font-family:"Playfair Display",serif;color:var(--green);font-size:24px}
+.card p{font-size:14px;color:var(--muted);margin:8px 0 17px}
+.price-row{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.price{font-size:23px;font-weight:900;color:var(--orange)}
+.small-order{
+  border:0;background:var(--green);color:#fff;padding:10px 14px;border-radius:999px;
+  cursor:pointer;font-size:12px;font-weight:800
+}
+
+/* OFFER */
+.offer{
+  padding:70px 0;background:var(--green);color:#fff;position:relative;overflow:hidden
+}
+.offer:before,.offer:after{
+  content:"";position:absolute;border:1px solid rgba(255,255,255,.13);border-radius:50%
+}
+.offer:before{width:420px;height:420px;right:-120px;top:-180px}
+.offer:after{width:280px;height:280px;left:-120px;bottom:-180px}
+.offer-inner{display:flex;align-items:center;justify-content:space-between;gap:30px;position:relative;z-index:1}
+.offer h2{font-family:"Playfair Display",serif;font-size:clamp(34px,4vw,52px);line-height:1.1}
+.offer p{color:#dfe9dc;margin-top:9px}
+.offer .btn{background:var(--orange);color:#fff;white-space:nowrap}
+
+/* WHY */
+.why-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.feature{
+  padding:30px;border:1px solid var(--line);border-radius:var(--radius);
+  background:#fff;transition:.3s
+}
+.feature:hover{transform:translateY(-5px)}
+.icon{
+  width:58px;height:58px;border-radius:18px;display:grid;place-items:center;
+  background:#f4e7cf;color:var(--orange);font-size:23px;margin-bottom:18px
+}
+.feature h3{color:var(--green);margin-bottom:7px}
+.feature p{color:var(--muted);font-size:14px}
+
+/* GALLERY */
+.gallery-section{background:#fff}
+.gallery-grid{display:grid;grid-template-columns:1.3fr .7fr .7fr;grid-auto-rows:250px;gap:16px}
+.gallery-item{border-radius:24px;overflow:hidden;position:relative;background:#eee}
+.gallery-item:first-child{grid-row:span 2}
+.gallery-item img{width:100%;height:100%;object-fit:cover;transition:.5s}
+.gallery-item:hover img{transform:scale(1.06)}
+.gallery-caption{
+  position:absolute;left:16px;bottom:16px;padding:9px 13px;border-radius:999px;
+  background:rgba(0,0,0,.52);color:#fff;font-size:12px;font-weight:700;
+  backdrop-filter:blur(8px)
+}
+
+/* STATS */
+.stats{padding:65px 0;background:#f4f6ed}
+.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;text-align:center}
+.stat strong{font-family:"Playfair Display",serif;color:var(--green);font-size:48px;display:block}
+.stat span{color:var(--muted);font-size:13px;font-weight:700}
+
+/* CONTACT */
+.contact-section{background:var(--cream)}
+.contact-grid{display:grid;grid-template-columns:1fr .9fr;gap:28px;align-items:stretch}
+.contact-card{
+  background:#fff;border:1px solid var(--line);border-radius:30px;padding:35px;box-shadow:0 15px 45px rgba(35,45,31,.07)
+}
+.contact-list{display:grid;gap:18px;margin-top:25px}
+.contact-row{display:flex;gap:14px;align-items:flex-start}
+.contact-row i{
+  width:42px;height:42px;border-radius:13px;background:#eef3e8;color:var(--green);
+  display:grid;place-items:center;flex:0 0 auto
+}
+.contact-row b{display:block;color:var(--green);font-size:13px}
+.contact-row span{font-size:14px;color:var(--muted)}
+.socials{display:flex;gap:10px;margin-top:25px;flex-wrap:wrap}
+.socials a{padding:11px 15px;border-radius:999px;background:#f4f6ed;color:var(--green);font-weight:800;font-size:13px}
+.map-box{
+  min-height:420px;border-radius:30px;overflow:hidden;position:relative;
+  background:
+    linear-gradient(rgba(41,71,47,.72),rgba(41,71,47,.72)),
+    url("assets/parcel.png") center/cover;
+  display:grid;place-items:center;text-align:center;padding:30px;color:#fff
+}
+.map-box h3{font-family:"Playfair Display",serif;font-size:38px}
+.map-box p{color:#e9f0e6;max-width:430px;margin:10px auto 22px}
+
+/* FOOTER */
+footer{background:#18251a;color:#dce6da;padding:45px 0}
+.footer-grid{display:flex;align-items:center;justify-content:space-between;gap:25px}
+.footer-brand{font-size:18px;font-weight:900;color:#fff}
+.footer-note{font-size:13px;color:#aebcad}
+.back-top{
+  width:42px;height:42px;border-radius:50%;display:grid;place-items:center;
+  background:#fff;color:var(--green)
+}
+
+/* FLOATING WHATSAPP */
+.whatsapp{
+  position:fixed;right:22px;bottom:22px;width:58px;height:58px;border-radius:50%;
+  display:grid;place-items:center;background:#25D366;color:#fff;font-size:27px;
+  box-shadow:0 15px 35px rgba(37,211,102,.35);z-index:999;transition:.25s
+}
+.whatsapp:hover{transform:scale(1.08)}
+
+/* MODAL */
+.modal{position:fixed;inset:0;background:rgba(10,18,11,.68);backdrop-filter:blur(8px);display:none;place-items:center;z-index:2000;padding:20px}
+.modal.show{display:grid}
+.modal-box{width:min(470px,100%);background:#fff;border-radius:28px;padding:30px;position:relative}
+.close{position:absolute;right:18px;top:15px;border:0;background:#f1f3ed;width:36px;height:36px;border-radius:50%;cursor:pointer;color:var(--green)}
+.modal h3{font-family:"Playfair Display",serif;color:var(--green);font-size:30px}
+.modal p{color:var(--muted);margin:5px 0 20px}
+.field{margin-bottom:13px}
+.field label{font-size:12px;font-weight:800;color:var(--green);display:block;margin-bottom:6px}
+.field input,.field select{
+  width:100%;padding:13px 14px;border:1px solid #dfe5da;border-radius:13px;outline:none;
+  font:inherit
+}
+.field input:focus,.field select:focus{border-color:var(--orange)}
+.full{width:100%;margin-top:5px}
+
+/* REVEAL */
+.reveal{opacity:0;transform:translateY(22px);transition:.7s ease}
+.reveal.visible{opacity:1;transform:none}
+
+/* MOBILE */
+@media(max-width:980px){
+  .hero-grid,.contact-grid{grid-template-columns:1fr}
+  .hero{padding-top:125px}
+  .hero-visual{max-width:700px;margin:auto;width:100%}
+  .menu-grid{grid-template-columns:repeat(2,1fr)}
+  .stats-grid{grid-template-columns:repeat(2,1fr)}
+  .gallery-grid{grid-template-columns:1fr 1fr;grid-auto-rows:230px}
+  .gallery-item:first-child{grid-row:span 2}
+}
+@media(max-width:760px){
+  .nav-links,.nav-cta{display:none}
+  .menu-toggle{display:block}
+  .nav-links.open{
+    display:flex;position:absolute;top:76px;left:4%;right:4%;padding:18px;
+    background:rgba(255,250,240,.98);border-radius:20px;box-shadow:var(--shadow);
+    flex-direction:column;align-items:flex-start;gap:17px
+  }
+  .hero{padding-top:110px}
+  .hero h1{letter-spacing:-1px}
+  .hero-photo{height:460px}
+  .hero-badge{left:-8px;bottom:20px;width:135px;height:135px}
+  .hero-badge strong{font-size:21px}
+  .section-head,.offer-inner,.footer-grid{align-items:flex-start;flex-direction:column}
+  section{padding:80px 0}
+  .menu-grid,.why-grid{grid-template-columns:1fr}
+  .gallery-grid{grid-template-columns:1fr;grid-auto-rows:250px}
+  .gallery-item:first-child{grid-row:span 1}
+  .stats-grid{grid-template-columns:1fr 1fr}
+}
+</style>
+</head>
+
+<body id="top">
+
+<header class="nav" id="navbar">
+  <div class="container nav-inner">
+    <a class="logo" href="#top" aria-label="Palani Pani Poori home">
+      <div class="logo-mark"><i class="fa-solid fa-bowl-food"></i></div>
+      <span>PALANI PANI POORI</span>
+    </a>
+
+    <nav class="nav-links" id="navLinks">
+      <a href="#top">Home</a>
+      <a href="#menu">Menu</a>
+      <a href="#story">Why Us</a>
+      <a href="#gallery">Gallery</a>
+      <a href="#contact">Visit Us</a>
+    </nav>
+
+    <a class="nav-cta" href="#contact"><i class="fa-solid fa-location-dot"></i> Find Us</a>
+    <button class="menu-toggle" id="menuToggle" aria-label="Open menu"><i class="fa-solid fa-bars"></i></button>
+  </div>
+</header>
+
+<main>
+<section class="hero">
+  <div class="container hero-grid">
+    <div class="reveal">
+      <div class="kicker"><i class="fa-solid fa-fire"></i> Chennai street-food favourite</div>
+      <h1>Big flavour.<br><em>Small bites.</em><br>Pure happiness.</h1>
+      <p class="hero-copy">
+        Freshly prepared street-style snacks with that perfect mix of crunch, spice and flavour.
+        Welcome to <b>Palani Pani Poori</b>.
+      </p>
+
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="#menu"><i class="fa-solid fa-utensils"></i> Explore Menu</a>
+        <a class="btn btn-secondary" target="_blank"
+           href="https://wa.me/919345487215?text=Hello%20PALANI%20PANI%20POORI%2C%20I%20want%20to%20place%20an%20order.">
+          <i class="fa-brands fa-whatsapp"></i> Order on WhatsApp
+        </a>
+      </div>
+
+      <div class="hero-trust">
+        <span><i class="fa-solid fa-leaf"></i> Fresh ingredients</span>
+        <span><i class="fa-solid fa-shield-heart"></i> Hygienic preparation</span>
+        <span><i class="fa-solid fa-star"></i> Full-on taste</span>
+      </div>
+    </div>
+
+    <div class="hero-visual reveal">
+      <div class="hero-photo">
+        <img src="assets/fire-mushroom.jpg" alt="Palani Pani Poori spicy street food">
+      </div>
+      <div class="hero-badge">
+        <div><strong>FRESH</strong><small>CRISPY • SPICY<br>IRRESISTIBLE</small></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="menu-section" id="menu">
+  <div class="container">
+    <div class="section-head reveal">
+      <div>
+        <div class="eyebrow">Our favourites</div>
+        <h2 class="section-title">Made to make you come back.</h2>
+      </div>
+      <p class="section-sub">Pick your favourite, hit Order, and send the order directly to WhatsApp.</p>
+    </div>
+
+    <div class="menu-grid">
+      <article class="card reveal">
+        <div class="food-img">
+          <img src="assets/fire-mushroom.jpg" alt="Fire Mushroom">
+          <span class="tag">SIGNATURE</span>
+        </div>
+        <div class="card-body">
+          <h3>Classy Pani Poori</h3>
+          <p>Crispy pooris with potato, chickpeas, fresh toppings and spicy pani.</p>
+          <div class="price-row"><span class="price">₹35</span><button class="small-order" data-item="Classy Pani Poori">Order</button></div>
+        </div>
+      </article>
+
+      <article class="card reveal">
+        <div class="food-img">
+          <img src="assets/fire-mushroom.jpg" alt="Masala Pani Poori">
+          <span class="tag">CUSTOMER PICK</span>
+        </div>
+        <div class="card-body">
+          <h3>Masala Pani Poori</h3>
+          <p>Loaded with special masala, crunchy toppings and delicious flavours.</p>
+          <div class="price-row"><span class="price">₹35</span><button class="small-order" data-item="Masala Pani Poori">Order</button></div>
+        </div>
+      </article>
+
+      <article class="card reveal">
+        <div class="food-img">
+          <img src="assets/fire-mushroom.jpg" alt="Fire Mushroom">
+          <span class="tag">SPICY</span>
+        </div>
+        <div class="card-body">
+          <h3>Fire Mushroom</h3>
+          <p>Our signature spicy mushroom special for people who love bold flavour.</p>
+          <div class="price-row"><span class="price">₹40</span><button class="small-order" data-item="Fire Mushroom">Order</button></div>
+        </div>
+      </article>
+
+      <article class="card reveal">
+        <div class="food-img">
+          <img src="assets/parcel.png" alt="Palani Pani Poori parcel">
+          <span class="tag">PARCEL</span>
+        </div>
+        <div class="card-body">
+          <h3>Parcel Available</h3>
+          <p>Take your favourite snacks home with neat, convenient food packing.</p>
+          <div class="price-row"><span class="price">Available</span><button class="small-order" data-item="Parcel">Book</button></div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="offer">
+  <div class="container offer-inner reveal">
+    <div>
+      <div class="eyebrow" style="color:#ffd26b">Limited-time offer</div>
+      <h2>Buy 2 plates.<br>Get 1 soft drink FREE.</h2>
+      <p>Bring your friends. Make the snack break better.</p>
+    </div>
+    <a class="btn" href="#contact">Visit Palani Pani Poori <i class="fa-solid fa-arrow-right"></i></a>
+  </div>
+</section>
+
+<section id="story">
+  <div class="container">
+    <div class="section-head reveal">
+      <div>
+        <div class="eyebrow">Why choose us</div>
+        <h2 class="section-title">Simple food. Serious taste.</h2>
+      </div>
+      <p class="section-sub">A professional food experience starts with the basics: fresh ingredients, clean preparation and consistent taste.</p>
+    </div>
+
+    <div class="why-grid">
+      <div class="feature reveal"><div class="icon"><i class="fa-solid fa-leaf"></i></div><h3>Fresh Ingredients</h3><p>Fresh vegetables, masala and ingredients prepared for every serving.</p></div>
+      <div class="feature reveal"><div class="icon"><i class="fa-solid fa-fire-flame-curved"></i></div><h3>Bold Flavours</h3><p>A signature combination of crunch, spice, tang and texture in every bite.</p></div>
+      <div class="feature reveal"><div class="icon"><i class="fa-solid fa-hand-sparkles"></i></div><h3>Hygiene First</h3><p>Clean preparation and quality ingredients are part of the experience.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="gallery-section" id="gallery">
+  <div class="container">
+    <div class="section-head reveal">
+      <div>
+        <div class="eyebrow">Real food. Real moments.</div>
+        <h2 class="section-title">A little taste of Palani.</h2>
+      </div>
+    </div>
+
+    <div class="gallery-grid">
+      <div class="gallery-item reveal"><img src="assets/fire-mushroom.jpg" alt="Palani street food"><span class="gallery-caption">Street-style flavours</span></div>
+      <div class="gallery-item reveal"><img src="assets/parcel.png" alt="Palani parcel packaging"><span class="gallery-caption">Packed with care</span></div>
+      <div class="gallery-item reveal"><img src="assets/fire-mushroom.jpg" alt="Spicy food"><span class="gallery-caption">Fresh & spicy</span></div>
+      <div class="gallery-item reveal"><img src="assets/parcel.png" alt="Food parcel"><span class="gallery-caption">Parcel available</span></div>
+      <div class="gallery-item reveal"><img src="assets/fire-mushroom.jpg" alt="Food special"><span class="gallery-caption">Made for food lovers</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="stats">
+  <div class="container stats-grid">
+    <div class="stat reveal"><strong>1L+</strong><span>Happy Customers</span></div>
+    <div class="stat reveal"><strong>3</strong><span>Branches</span></div>
+    <div class="stat reveal"><strong>3</strong><span>Special Items</span></div>
+    <div class="stat reveal"><strong>★</strong><span>Made with Love</span></div>
+  </div>
+</section>
+
+<section class="contact-section" id="contact">
+  <div class="container">
+    <div class="section-head reveal">
+      <div>
+        <div class="eyebrow">Come hungry</div>
+        <h2 class="section-title">Find your nearest Palani.</h2>
+      </div>
+      <p class="section-sub">Three convenient locations in Chennai. Call, message or visit us directly.</p>
+    </div>
+
+    <div class="contact-grid">
+      <div class="contact-card reveal">
+        <h3 style="font-family:'Playfair Display',serif;color:var(--green);font-size:30px">Palani Pani Poori</h3>
+        <div class="contact-list">
+          <div class="contact-row"><i class="fa-solid fa-location-dot"></i><div><b>Branch 01</b><span>Near Play Ground, S. Kolathur, Chennai – 600129</span></div></div>
+          <div class="contact-row"><i class="fa-solid fa-location-dot"></i><div><b>Branch 02</b><span>Vinayagapuram Bus Stand</span></div></div>
+          <div class="contact-row"><i class="fa-solid fa-location-dot"></i><div><b>Branch 03</b><span>S. Kolathur Bus Stand</span></div></div>
+          <div class="contact-row"><i class="fa-solid fa-phone"></i><div><b>Call Us</b><span>+91 93454 87215 / +91 97515 70142</span></div></div>
+          <div class="contact-row"><i class="fa-solid fa-envelope"></i><div><b>Email</b><span>harishpalani5157@gmail.com</span></div></div>
+        </div>
+
+        <div class="socials">
+          <a href="https://instagram.com/chennai__panipoori" target="_blank"><i class="fa-brands fa-instagram"></i> Instagram</a>
+          <a href="https://wa.me/919345487215?text=Hello%20PALANI%20PANI%20POORI%2C%20I%20want%20to%20place%20an%20order." target="_blank"><i class="fa-brands fa-whatsapp"></i> WhatsApp</a>
+        </div>
+      </div>
+
+      <div class="map-box reveal">
+        <div>
+          <i class="fa-solid fa-location-dot" style="font-size:35px;color:#ffd26b"></i>
+          <h3>See you at the stall.</h3>
+          <p>For exact directions, tap the button below and open your preferred map app.</p>
+          <a class="btn" style="background:#fff;color:var(--green)" target="_blank"
+             href="https://www.google.com/maps/search/?api=1&query=Palani%20Pani%20Poori%20S%20Kolathur%20Chennai">
+             <i class="fa-solid fa-map"></i> Open in Maps
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="container footer-grid">
+    <div>
+      <div class="footer-brand">PALANI PANI POORI</div>
+      <div class="footer-note">Fresh. Hygienic. Irresistible. © 2026</div>
+    </div>
+    <a class="back-top" href="#top" aria-label="Back to top"><i class="fa-solid fa-arrow-up"></i></a>
+  </div>
+</footer>
+
+<a class="whatsapp" target="_blank"
+   href="https://wa.me/919345487215?text=Hello%20PALANI%20PANI%20POORI%2C%20I%20want%20to%20place%20an%20order."
+   aria-label="Order on WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+
+<div class="modal" id="orderModal">
+  <div class="modal-box">
+    <button class="close" id="closeModal" aria-label="Close"><i class="fa-solid fa-xmark"></i></button>
+    <h3>Quick Order</h3>
+    <p>Choose your item and we'll prepare a WhatsApp order message.</p>
+    <div class="field">
+      <label>ITEM</label>
+      <select id="itemSelect">
+        <option>Classy Pani Poori</option>
+        <option>Masala Pani Poori</option>
+        <option>Fire Mushroom</option>
+        <option>Parcel</option>
+      </select>
+    </div>
+    <div class="field">
+      <label>QUANTITY</label>
+      <input id="qty" type="number" min="1" value="1">
+    </div>
+    <button class="btn btn-primary full" id="sendOrder"><i class="fa-brands fa-whatsapp"></i> Continue on WhatsApp</button>
+  </div>
+</div>
+
+<script>
+const navbar = document.getElementById("navbar");
+window.addEventListener("scroll", () => {
+  navbar.classList.toggle("scrolled", window.scrollY > 20);
+});
+
+const menuToggle = document.getElementById("menuToggle");
+const navLinks = document.getElementById("navLinks");
+menuToggle.addEventListener("click", () => navLinks.classList.toggle("open"));
+document.querySelectorAll(".nav-links a").forEach(a => {
+  a.addEventListener("click", () => navLinks.classList.remove("open"));
+});
+
+const modal = document.getElementById("orderModal");
+const itemSelect = document.getElementById("itemSelect");
+const qty = document.getElementById("qty");
+
+document.querySelectorAll(".small-order").forEach(btn => {
+  btn.addEventListener("click", () => {
+    itemSelect.value = btn.dataset.item;
+    modal.classList.add("show");
+    qty.focus();
+  });
+});
+document.getElementById("closeModal").addEventListener("click", () => modal.classList.remove("show"));
+modal.addEventListener("click", e => { if(e.target === modal) modal.classList.remove("show"); });
+
+document.getElementById("sendOrder").addEventListener("click", () => {
+  const item = itemSelect.value;
+  const count = Math.max(1, Number(qty.value) || 1);
+  const text = `Hello PALANI PANI POORI!%0A%0AI want to order:%0A• ${item}%0A• Quantity: ${count}%0A%0AThank you!`;
+  window.open(`https://wa.me/919345487215?text=${text}`, "_blank");
+});
+
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if(entry.isIntersecting) {
+      entry.target.classList.add("visible");
+      observer.unobserve(entry.target);
+    }
+  });
+}, {threshold:.12});
+document.querySelectorAll(".reveal").forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
