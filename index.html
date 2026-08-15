@@ -324,8 +324,16 @@ footer{background:#18251a;color:#dce6da;padding:45px 0}
   }
   .hero{padding-top:110px}
   .hero h1{letter-spacing:-1px}
-  .hero-photo{
-  height:570px;
+  .hero-photo {
+  height: auto;
+  transform: none;
+  border-width: 6px;
+}
+
+.hero-photo img {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
 }
   .hero-badge{left:-8px;bottom:20px;width:135px;height:135px}
   .hero-badge strong{font-size:21px}
