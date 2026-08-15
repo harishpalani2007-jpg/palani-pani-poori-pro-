@@ -956,6 +956,38 @@ footer{background:#18251a;color:#dce6da;padding:45px 0}
   height: 100%;
   object-fit: cover;
 }
+
+/* ===== MOBILE HERO IMAGE FINAL FIX ===== */
+@media (max-width: 760px) {
+
+  .hero-grid {
+    grid-template-columns: 1fr;
+    gap: 35px;
+  }
+
+  .hero-visual {
+    grid-column: 1;
+    grid-row: 2;
+    width: 100%;
+    margin-top: 10px;
+  }
+
+  .hero-photo {
+    width: 100%;
+    height: auto !important;
+    max-width: none;
+    margin: 0;
+    transform: none;
+    border: 6px solid rgba(255,255,255,.7);
+    border-radius: 28px;
+  }
+
+  .hero-photo img {
+    width: 100%;
+    height: auto !important;
+    object-fit: contain;
+  }
+}
 </style>
 </head>
 
