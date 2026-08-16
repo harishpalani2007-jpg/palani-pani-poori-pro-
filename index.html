@@ -254,11 +254,43 @@ footer{background:#18251a;color:#dce6da;padding:45px 0}
 
 /* FLOATING WHATSAPP */
 .whatsapp{
-  position:fixed;right:22px;bottom:22px;width:58px;height:58px;border-radius:50%;
+  position:fixed;right:22px;bottom:94px;width:58px;height:58px;border-radius:50%;
   display:grid;place-items:center;background:#25D366;color:#fff;font-size:27px;
   box-shadow:0 15px 35px rgba(37,211,102,.35);z-index:999;transition:.25s
 }
 .whatsapp:hover{transform:scale(1.08)}
+
+/* INSTAGRAM FLOATING BUTTON */
+.instagram-float{
+  position:fixed;
+  right:22px;
+  bottom:22px;
+  width:58px;
+  height:58px;
+  border-radius:50%;
+  display:grid;
+  place-items:center;
+  background:linear-gradient(
+    135deg,
+    #833ab4,
+    #c13584,
+    #e1306c,
+    #fd1d1d,
+    #f77737,
+    #fcaf45
+  );
+  color:#fff;
+  font-size:27px;
+  box-shadow:0 15px 35px rgba(193,53,132,.35);
+  z-index:999;
+  transition:.25s;
+  text-decoration:none;
+}
+
+.instagram-float:hover{
+  transform:scale(1.08);
+  box-shadow:0 18px 40px rgba(193,53,132,.45);
+}
 
 /* MODAL */
 .modal{position:fixed;inset:0;background:rgba(10,18,11,.68);backdrop-filter:blur(8px);display:none;place-items:center;z-index:2000;padding:20px}
@@ -349,7 +381,7 @@ footer{background:#18251a;color:#dce6da;padding:45px 0}
 .swiggy-float {
     position: fixed;
     right: 20px;
-    bottom: 90px;
+    bottom: 166px;
     width: 64px;
     height: 64px;
     border-radius: 50%;
@@ -1292,6 +1324,15 @@ footer{background:#18251a;color:#dce6da;padding:45px 0}
    aria-label="Order on WhatsApp">
   <i class="fa-brands fa-whatsapp"></i>
 </a>
+<!-- Instagram Floating Button -->
+<a class="instagram-float"
+   target="_blank"
+   rel="noopener noreferrer"
+   href="https://instagram.com/chennai__panipoori"
+   aria-label="Follow us on Instagram">
+  <i class="fa-brands fa-instagram"></i>
+</a>
+
 
 <div class="modal" id="orderModal">
   <div class="modal-box">
