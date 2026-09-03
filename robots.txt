@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://palani-pani-poori-pro-m6jo.vercel.app/sitemap.xml
