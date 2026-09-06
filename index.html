@@ -229,6 +229,283 @@ section{padding:105px 0}
 .stat strong{font-family:"Playfair Display",serif;color:var(--green);font-size:48px;display:block}
 .stat span{color:var(--muted);font-size:13px;font-weight:700}
 
+
+/* =========================================
+   CUSTOMER REVIEWS
+========================================= */
+
+.reviews-section {
+  background: #fff;
+}
+
+.reviews-layout {
+  display: grid;
+  grid-template-columns: .85fr 1.15fr;
+  gap: 28px;
+  align-items: start;
+}
+
+/* Rating Summary */
+
+.rating-summary {
+  background: var(--green);
+  color: #fff;
+  border-radius: 30px;
+  padding: 35px;
+  position: sticky;
+  top: 100px;
+  box-shadow: 0 18px 45px rgba(41,71,47,.16);
+}
+
+.rating-summary h3 {
+  font-family: "Playfair Display", serif;
+  font-size: 30px;
+  margin-bottom: 5px;
+}
+
+.rating-number {
+  font-family: "Playfair Display", serif;
+  font-size: 64px;
+  line-height: 1;
+  margin-top: 20px;
+  color: #ffd26b;
+}
+
+.rating-stars {
+  color: #ffd26b;
+  font-size: 23px;
+  letter-spacing: 3px;
+  margin: 8px 0;
+}
+
+.rating-count {
+  color: #dfe9dc;
+  font-size: 14px;
+}
+
+/* Distribution */
+
+.rating-distribution {
+  margin-top: 25px;
+  display: grid;
+  gap: 9px;
+}
+
+.rating-row {
+  display: grid;
+  grid-template-columns: 28px 1fr 30px;
+  align-items: center;
+  gap: 9px;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.rating-bar {
+  height: 8px;
+  background: rgba(255,255,255,.18);
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.rating-bar-fill {
+  height: 100%;
+  width: 0%;
+  background: #ffd26b;
+  border-radius: 999px;
+  transition: width .5s ease;
+}
+
+/* Review Form */
+
+.review-form-card {
+  background: #fffaf0;
+  border: 1px solid var(--line);
+  border-radius: 30px;
+  padding: 35px;
+  box-shadow: 0 15px 45px rgba(35,45,31,.07);
+}
+
+.review-form-card h3 {
+  font-family: "Playfair Display", serif;
+  color: var(--green);
+  font-size: 30px;
+  margin-bottom: 5px;
+}
+
+.review-form-card > p {
+  color: var(--muted);
+  margin-bottom: 24px;
+  font-size: 14px;
+}
+
+/* Star Selector */
+
+.star-selector {
+  display: flex;
+  gap: 7px;
+  margin-bottom: 20px;
+}
+
+.star-btn {
+  width: 44px;
+  height: 44px;
+  border: 1px solid #e0e5da;
+  background: #fff;
+  color: #c7ccc4;
+  border-radius: 12px;
+  cursor: pointer;
+  font-size: 20px;
+  transition: .2s;
+}
+
+.star-btn:hover,
+.star-btn.active {
+  color: #f28a22;
+  border-color: #f28a22;
+  background: #fff4e8;
+  transform: translateY(-2px);
+}
+
+/* Review Fields */
+
+.review-field {
+  margin-bottom: 15px;
+}
+
+.review-field label {
+  display: block;
+  color: var(--green);
+  font-size: 12px;
+  font-weight: 800;
+  margin-bottom: 7px;
+}
+
+.review-field input,
+.review-field textarea {
+  width: 100%;
+  padding: 13px 14px;
+  border: 1px solid #dfe5da;
+  border-radius: 13px;
+  outline: none;
+  font: inherit;
+  background: #fff;
+}
+
+.review-field textarea {
+  min-height: 120px;
+  resize: vertical;
+}
+
+.review-field input:focus,
+.review-field textarea:focus {
+  border-color: var(--orange);
+}
+
+.review-counter {
+  text-align: right;
+  color: var(--muted);
+  font-size: 11px;
+  margin-top: 4px;
+}
+
+/* Messages */
+
+.review-message {
+  margin-top: 14px;
+  padding: 12px 14px;
+  border-radius: 12px;
+  display: none;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.review-message.success {
+  display: block;
+  background: #e8f6e9;
+  color: #24632b;
+}
+
+.review-message.error {
+  display: block;
+  background: #fff0ed;
+  color: #a83220;
+}
+
+/* Reviews List */
+
+.reviews-list {
+  margin-top: 30px;
+  display: grid;
+  gap: 18px;
+}
+
+.review-card {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 22px;
+  padding: 22px;
+  box-shadow: 0 10px 30px rgba(35,45,31,.06);
+}
+
+.review-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+}
+
+.reviewer-name {
+  color: var(--green);
+  font-weight: 900;
+}
+
+.review-date {
+  color: var(--muted);
+  font-size: 11px;
+}
+
+.review-card-stars {
+  color: var(--orange);
+  letter-spacing: 2px;
+  margin: 6px 0 10px;
+}
+
+.review-text {
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.7;
+  overflow-wrap: anywhere;
+}
+
+.no-reviews {
+  padding: 35px;
+  text-align: center;
+  border: 1px dashed #ccd5c8;
+  border-radius: 20px;
+  color: var(--muted);
+  background: #fafcf8;
+}
+
+/* Mobile */
+
+@media (max-width: 760px) {
+  .reviews-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .rating-summary {
+    position: static;
+  }
+
+  .review-form-card {
+    padding: 25px;
+  }
+
+  .rating-number {
+    font-size: 55px;
+  }
+}
+
 /* CONTACT */
 .contact-section{background:var(--cream)}
 .contact-grid{display:grid;grid-template-columns:1fr .9fr;gap:28px;align-items:stretch}
@@ -681,8 +958,6 @@ footer{background:#18251a;color:#dce6da;padding:45px 0}
 @media (max-width: 600px) {
     .experience-badge {
         flex-direction: column;
-        gap: 4px;
-        border-radius: 14px;
     }
 }
 .experience-badge {
@@ -1150,6 +1425,40 @@ footer{background:#18251a;color:#dce6da;padding:45px 0}
     "https://www.youtube.com/@HARISHPALANI-m1g"
   ]
 }
+// =========================================
+// CUSTOMER REVIEWS SYSTEM
+// =========================================
+
+const API_BASE_URL = "http://localhost:5000";
+
+let selectedRating = 0;
+
+// -------------------------------
+// STAR SELECTION
+// -------------------------------
+
+document.querySelectorAll(".star-btn").forEach(btn => {
+
+  btn.addEventListener("click", () => {
+
+    selectedRating = Number(btn.dataset.rating);
+
+    document.querySelectorAll(".star-btn").forEach(star => {
+
+      star.classList.toggle(
+        "active",
+        Number(star.dataset.rating) <= selectedRating
+      );
+
+    });
+
+  });
+
+});
+
+
+// -------------------------------
+// CHARACTER
 </script>
 </head>
 
@@ -1167,6 +1476,7 @@ footer{background:#18251a;color:#dce6da;padding:45px 0}
       <a href="#menu">Menu</a>
       <a href="#story">Why Us</a>
       <a href="#gallery">Gallery</a>
+      <a href="#reviews">Reviews</a>
       <a href="#contact">Visit Us</a>
     </nav>
 
@@ -1355,6 +1665,196 @@ footer{background:#18251a;color:#dce6da;padding:45px 0}
     <div class="stat reveal"><strong>★</strong><span>Made with Love</span></div>
   </div>
 </section>
+
+<!-- ================= CUSTOMER REVIEWS ================= -->
+<section class="reviews-section" id="reviews">
+
+  <div class="container">
+
+    <div class="section-head reveal">
+      <div>
+        <div class="eyebrow">Customer Reviews</div>
+        <h2 class="section-title">What our customers say.</h2>
+      </div>
+
+      <p class="section-sub">
+        Real reviews from real customers of Palani Pani Poori.
+      </p>
+    </div>
+
+    <div class="reviews-layout">
+
+      <!-- LEFT: RATING SUMMARY -->
+      <div class="rating-summary reveal">
+
+        <h3>Our Rating</h3>
+
+        <div class="rating-number" id="averageRating">
+          0.0
+        </div>
+
+        <div class="rating-stars" id="averageStars">
+          ☆☆☆☆☆
+        </div>
+
+        <div class="rating-count" id="ratingCount">
+          0 ratings
+        </div>
+
+        <div class="rating-distribution">
+
+          <div class="rating-row">
+            <span>5★</span>
+            <div class="rating-bar">
+              <div class="rating-bar-fill" id="bar5"></div>
+            </div>
+            <span id="count5">0</span>
+          </div>
+
+          <div class="rating-row">
+            <span>4★</span>
+            <div class="rating-bar">
+              <div class="rating-bar-fill" id="bar4"></div>
+            </div>
+            <span id="count4">0</span>
+          </div>
+
+          <div class="rating-row">
+            <span>3★</span>
+            <div class="rating-bar">
+              <div class="rating-bar-fill" id="bar3"></div>
+            </div>
+            <span id="count3">0</span>
+          </div>
+
+          <div class="rating-row">
+            <span>2★</span>
+            <div class="rating-bar">
+              <div class="rating-bar-fill" id="bar2"></div>
+            </div>
+            <span id="count2">0</span>
+          </div>
+
+          <div class="rating-row">
+            <span>1★</span>
+            <div class="rating-bar">
+              <div class="rating-bar-fill" id="bar1"></div>
+            </div>
+            <span id="count1">0</span>
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <!-- RIGHT: REVIEW FORM + REVIEWS -->
+      <div>
+
+        <div class="review-form-card reveal">
+
+          <h3>Leave a Review ⭐</h3>
+
+          <p>
+            Had pani poori with us? Tell us about your experience!
+          </p>
+
+          <!-- STAR SELECTOR -->
+          <div class="star-selector" id="starSelector">
+
+            <button type="button" class="star-btn" data-rating="1">
+              ★
+            </button>
+
+            <button type="button" class="star-btn" data-rating="2">
+              ★
+            </button>
+
+            <button type="button" class="star-btn" data-rating="3">
+              ★
+            </button>
+
+            <button type="button" class="star-btn" data-rating="4">
+              ★
+            </button>
+
+            <button type="button" class="star-btn" data-rating="5">
+              ★
+            </button>
+
+          </div>
+
+          <div class="review-field">
+
+            <label for="reviewName">
+              YOUR NAME
+            </label>
+
+            <input
+              type="text"
+              id="reviewName"
+              maxlength="50"
+              placeholder="Enter your name"
+              autocomplete="name"
+            >
+
+          </div>
+
+          <div class="review-field">
+
+            <label for="reviewComment">
+              YOUR REVIEW
+            </label>
+
+            <textarea
+              id="reviewComment"
+              maxlength="500"
+              placeholder="Tell us about your experience..."
+            ></textarea>
+
+            <div class="review-counter">
+              <span id="reviewCharCount">0</span>/500
+            </div>
+
+          </div>
+
+          <button
+            type="button"
+            class="btn btn-primary"
+            id="submitReview"
+          >
+            <i class="fa-solid fa-paper-plane"></i>
+            Submit Review
+          </button>
+
+          <div
+            class="review-message"
+            id="reviewMessage"
+          ></div>
+
+        </div>
+
+
+        <!-- CUSTOMER REVIEWS LIST -->
+        <div
+          class="reviews-list"
+          id="reviewsList"
+        >
+
+          <div class="no-reviews">
+            Loading customer reviews...
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+<!-- ================= END CUSTOMER REVIEWS ================= -->
 
 <section class="contact-section" id="contact">
   <div class="container">
