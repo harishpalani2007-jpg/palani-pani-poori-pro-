@@ -245,8 +245,31 @@ app.get("/api/reviews/stats", async (req, res) => {
 
 const PORT = process.env.PORT || 5000;
 
+
+/* =========================
+   MONGODB CONNECTION
+========================= */
+
 async function startServer() {
   try {
+    console.log("=================================");
+    console.log("Starting PALANI PANI POORI Backend");
+    console.log("=================================");
+
+    // Check whether Render received the environment variable
+    console.log(
+      "MONGODB_URI exists:",
+      Boolean(process.env.MONGODB_URI)
+    );
+
+    if (!process.env.MONGODB_URI) {
+      console.error("❌ MONGODB_URI is missing!");
+      console.error(
+        "Please add MONGODB_URI in Render → Environment."
+      );
+      process.exit(1);
+    }
+
     console.log("Connecting to MongoDB...");
 
     await mongoose.connect(process.env.MONGODB_URI, {
@@ -257,11 +280,29 @@ async function startServer() {
 
     app.listen(PORT, () => {
       console.log(`Server running on port ${PORT} 🚀`);
+      console.log(`Port: ${PORT}`);
     });
 
   } catch (error) {
-    console.log("MongoDB Connection Error ❌");
-    console.log(error.message);
+    console.error("=================================");
+    console.error("MongoDB Connection Error ❌");
+    console.error("=================================");
+
+    console.error("Error name:", error.name);
+    console.error("Error message:", error.message);
+    console.error("Error code:", error.code || "N/A");
+
+    console.error("---------------------------------");
+    console.error(
+      "MongoDB connection failed. Check:"
+    );
+    console.error("1. MONGODB_URI in Render Environment");
+    console.error("2. MongoDB Atlas Database User");
+    console.error("3. MongoDB Atlas Network Access");
+    console.error("4. MongoDB cluster status");
+    console.error("---------------------------------");
+
+    process.exit(1);
   }
 }
 
