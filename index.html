@@ -1425,17 +1425,141 @@ footer{background:#18251a;color:#dce6da;padding:45px 0}
     "https://www.youtube.com/@HARISHPALANI-m1g"
   ]
 }
-// =========================================
-// CUSTOMER REVIEWS SYSTEM
-// =========================================
+</script>
 
-const API_BASE_URL = "http://localhost:5000";
+<script>
+
+const API_BASE_URL = "https://palani-pani-poori-backend.onrender.com";
 
 let selectedRating = 0;
 
-// -------------------------------
-// STAR SELECTION
-// -------------------------------
+
+/* =========================================
+   NAVBAR
+========================================= */
+
+const navbar = document.getElementById("navbar");
+
+window.addEventListener("scroll", () => {
+  navbar.classList.toggle("scrolled", window.scrollY > 20);
+});
+
+
+/* =========================================
+   MOBILE MENU
+========================================= */
+
+const menuToggle = document.getElementById("menuToggle");
+const navLinks = document.getElementById("navLinks");
+
+menuToggle.addEventListener("click", () => {
+  navLinks.classList.toggle("open");
+});
+
+document.querySelectorAll(".nav-links a").forEach(a => {
+  a.addEventListener("click", () => {
+    navLinks.classList.remove("open");
+  });
+});
+
+
+/* =========================================
+   ORDER MODAL
+========================================= */
+
+const modal = document.getElementById("orderModal");
+const itemSelect = document.getElementById("itemSelect");
+const qty = document.getElementById("qty");
+
+document.querySelectorAll(".small-order").forEach(btn => {
+
+  btn.addEventListener("click", () => {
+
+    itemSelect.value = btn.dataset.item;
+
+    modal.classList.add("show");
+
+    qty.focus();
+
+  });
+
+});
+
+document.getElementById("closeModal").addEventListener("click", () => {
+
+  modal.classList.remove("show");
+
+});
+
+modal.addEventListener("click", e => {
+
+  if (e.target === modal) {
+    modal.classList.remove("show");
+  }
+
+});
+
+
+document.getElementById("sendOrder").addEventListener("click", () => {
+
+  const item = itemSelect.value;
+
+  const count = Math.max(
+    1,
+    Number(qty.value) || 1
+  );
+
+  const message =
+    `Hello PALANI PANI POORI!\n\n` +
+    `I want to order:\n` +
+    `• ${item}\n` +
+    `• Quantity: ${count}\n\n` +
+    `Thank you!`;
+
+  const whatsappURL =
+    `https://wa.me/919345487215?text=${encodeURIComponent(message)}`;
+
+  window.open(whatsappURL, "_blank");
+
+});
+
+
+/* =========================================
+   SCROLL REVEAL
+========================================= */
+
+const observer = new IntersectionObserver(entries => {
+
+  entries.forEach(entry => {
+
+    if (entry.isIntersecting) {
+
+      entry.target.classList.add("visible");
+
+      observer.unobserve(entry.target);
+
+    }
+
+  });
+
+}, {
+  threshold: 0.12
+});
+
+
+document.querySelectorAll(".reveal").forEach(el => {
+
+  observer.observe(el);
+
+});
+
+
+/* =========================================
+   CUSTOMER REVIEWS
+========================================= */
+
+
+/* STAR SELECTION */
 
 document.querySelectorAll(".star-btn").forEach(btn => {
 
@@ -1457,8 +1581,414 @@ document.querySelectorAll(".star-btn").forEach(btn => {
 });
 
 
-// -------------------------------
-// CHARACTER
+/* CHARACTER COUNTER */
+
+const reviewComment = document.getElementById("reviewComment");
+const reviewCharCount = document.getElementById("reviewCharCount");
+
+reviewComment.addEventListener("input", () => {
+
+  reviewCharCount.textContent =
+    reviewComment.value.length;
+
+});
+
+
+/* MESSAGE */
+
+function showReviewMessage(message, type) {
+
+  const reviewMessage =
+    document.getElementById("reviewMessage");
+
+  reviewMessage.textContent = message;
+
+  reviewMessage.className =
+    `review-message ${type}`;
+
+}
+
+
+/* =========================================
+   LOAD REVIEWS
+========================================= */
+
+async function loadReviews() {
+
+  const reviewsList =
+    document.getElementById("reviewsList");
+
+  try {
+
+    const response = await fetch(
+      `${API_BASE_URL}/api/reviews`
+    );
+
+    if (!response.ok) {
+      throw new Error("Failed to load reviews");
+    }
+
+    const reviews = await response.json();
+
+    renderReviews(reviews);
+
+  } catch (error) {
+
+    console.error("Review loading error:", error);
+
+    reviewsList.innerHTML = `
+      <div class="no-reviews">
+        Unable to load reviews right now.
+        Please try again later.
+      </div>
+    `;
+
+  }
+
+}
+
+
+/* =========================================
+   DISPLAY REVIEWS
+========================================= */
+
+function renderReviews(reviews) {
+
+  const reviewsList =
+    document.getElementById("reviewsList");
+
+  if (!reviews || reviews.length === 0) {
+
+    reviewsList.innerHTML = `
+      <div class="no-reviews">
+        No reviews yet.
+        Be the first to share your experience! ⭐
+      </div>
+    `;
+
+    return;
+
+  }
+
+
+  reviewsList.innerHTML = reviews.map(review => {
+
+    const stars =
+      "★".repeat(review.rating) +
+      "☆".repeat(5 - review.rating);
+
+    const date =
+      new Date(review.createdAt)
+        .toLocaleDateString("en-IN", {
+          day: "numeric",
+          month: "short",
+          year: "numeric"
+        });
+
+    return `
+      <div class="review-card">
+
+        <div class="review-top">
+
+          <span class="reviewer-name">
+            ${escapeHTML(review.name)}
+          </span>
+
+          <span class="review-date">
+            ${date}
+          </span>
+
+        </div>
+
+        <div class="review-card-stars">
+          ${stars}
+        </div>
+
+        <div class="review-text">
+          ${escapeHTML(review.comment)}
+        </div>
+
+      </div>
+    `;
+
+  }).join("");
+
+}
+
+
+/* =========================================
+   SECURITY
+   Prevent HTML injection
+========================================= */
+
+function escapeHTML(value) {
+
+  return String(value)
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
+
+}
+
+
+/* =========================================
+   LOAD REVIEW STATISTICS
+========================================= */
+
+async function loadReviewStats() {
+
+  try {
+
+    const response = await fetch(
+      `${API_BASE_URL}/api/reviews/stats`
+    );
+
+    if (!response.ok) {
+      throw new Error("Failed to load statistics");
+    }
+
+    const stats = await response.json();
+
+
+    document.getElementById("averageRating")
+      .textContent =
+      Number(stats.average).toFixed(1);
+
+
+    document.getElementById("ratingCount")
+      .textContent =
+      `${stats.total} rating${stats.total === 1 ? "" : "s"}`;
+
+
+    /* Average stars */
+
+    const average =
+      Number(stats.average);
+
+    const fullStars =
+      Math.round(average);
+
+    document.getElementById("averageStars")
+      .textContent =
+      "★".repeat(fullStars) +
+      "☆".repeat(5 - fullStars);
+
+
+    /* Distribution */
+
+    for (let rating = 1; rating <= 5; rating++) {
+
+      const count =
+        stats.distribution[rating] || 0;
+
+      document.getElementById(
+        `count${rating}`
+      ).textContent = count;
+
+
+      const percentage =
+        stats.total > 0
+          ? (count / stats.total) * 100
+          : 0;
+
+
+      document.getElementById(
+        `bar${rating}`
+      ).style.width = `${percentage}%`;
+
+    }
+
+  } catch (error) {
+
+    console.error(
+      "Review statistics error:",
+      error
+    );
+
+  }
+
+}
+
+
+/* =========================================
+   SUBMIT REVIEW
+========================================= */
+
+const submitReview =
+  document.getElementById("submitReview");
+
+
+submitReview.addEventListener("click", async () => {
+
+  const name =
+    document.getElementById("reviewName")
+      .value.trim();
+
+  const comment =
+    document.getElementById("reviewComment")
+      .value.trim();
+
+
+  /* Validation */
+
+  if (selectedRating === 0) {
+
+    showReviewMessage(
+      "Please select a star rating ⭐",
+      "error"
+    );
+
+    return;
+
+  }
+
+
+  if (!name) {
+
+    showReviewMessage(
+      "Please enter your name.",
+      "error"
+    );
+
+    return;
+
+  }
+
+
+  if (!comment) {
+
+    showReviewMessage(
+      "Please write a review.",
+      "error"
+    );
+
+    return;
+
+  }
+
+
+  /* Loading state */
+
+  const originalButton =
+    submitReview.innerHTML;
+
+  submitReview.disabled = true;
+
+  submitReview.innerHTML = `
+    <i class="fa-solid fa-spinner fa-spin"></i>
+    Submitting...
+  `;
+
+
+  try {
+
+    const response = await fetch(
+      `${API_BASE_URL}/api/reviews`,
+      {
+        method: "POST",
+
+        headers: {
+          "Content-Type": "application/json"
+        },
+
+        body: JSON.stringify({
+          name: name,
+          rating: selectedRating,
+          comment: comment
+        })
+      }
+    );
+
+
+    const data =
+      await response.json();
+
+
+    if (!response.ok) {
+
+      throw new Error(
+        data.message ||
+        "Unable to submit review."
+      );
+
+    }
+
+
+    /* Success */
+
+    showReviewMessage(
+      data.message ||
+      "Thank you! Your review has been submitted ⭐",
+      "success"
+    );
+
+
+    /* Clear form */
+
+    document.getElementById("reviewName")
+      .value = "";
+
+    document.getElementById("reviewComment")
+      .value = "";
+
+    reviewCharCount.textContent = "0";
+
+
+    selectedRating = 0;
+
+
+    document.querySelectorAll(".star-btn")
+      .forEach(star => {
+
+        star.classList.remove("active");
+
+      });
+
+
+    /* Refresh reviews */
+
+    await loadReviews();
+
+    await loadReviewStats();
+
+
+  } catch (error) {
+
+    console.error(
+      "Review submission error:",
+      error
+    );
+
+
+    showReviewMessage(
+      error.message ||
+      "Unable to submit review. Please try again.",
+      "error"
+    );
+
+  } finally {
+
+    submitReview.disabled = false;
+
+    submitReview.innerHTML =
+      originalButton;
+
+  }
+
+});
+
+
+/* =========================================
+   INITIAL LOAD
+========================================= */
+
+loadReviews();
+
+loadReviewStats();
+
+</script>
 </script>
 </head>
 
@@ -2047,12 +2577,6 @@ document.querySelectorAll(".reveal").forEach(el => observer.observe(el));
    aria-label="Order on Swiggy"><img src="./assets/swiggy-logo.png" alt="Order on Swiggy">
 </a>
 
-<a class="whatsapp"
-   target="_blank"
-   href="YOUR_EXISTING_WHATSAPP_LINK"
-   aria-label="Order on WhatsApp">
-  <i class="fa-brands fa-whatsapp"></i>
-</a>
 
 </body>
 </html>
