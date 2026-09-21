@@ -19,6 +19,7 @@
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
 
+
 <style>
 :root{
   --green:#29472f;
@@ -1373,7 +1374,71 @@ footer{background:#18251a;color:#dce6da;padding:45px 0}
     grid-template-columns:1fr;
   }
 }
+/* =========================================
+   REVIEW VIEW ALL BUTTON
+   ========================================= */
 
+.review-view-more-wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-top: 18px;
+}
+
+.review-view-more-btn {
+  border: 1px solid rgba(255, 166, 0, 0.35);
+  background: #fffaf0;
+  color: #173d28;
+
+  padding: 12px 22px;
+
+  border-radius: 50px;
+
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 700;
+
+  cursor: pointer;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    background 0.2s ease;
+}
+
+.review-view-more-btn:hover {
+  transform: translateY(-2px);
+
+  background: #fff4dc;
+
+  box-shadow:
+    0 8px 22px rgba(0, 0, 0, 0.08);
+}
+
+.review-view-more-btn:active {
+  transform: translateY(0);
+}
+
+
+/* Mobile */
+
+@media (max-width: 600px) {
+
+  .review-view-more-wrapper {
+    margin-top: 14px;
+  }
+
+  .review-view-more-btn {
+    width: 100%;
+    padding: 13px 18px;
+    font-size: 13px;
+  }
+}
 </style>
 <link rel="icon" type="image/png" href="assets/iconmain.png">
 </head>
@@ -2062,12 +2127,17 @@ async function loadReviewStats() {
 }
 
 
-/* ⭐ LOAD CUSTOMER REVIEWS */
+/* =========================================
+   LOAD REVIEWS + VIEW ALL / SHOW LESS
+   ========================================= */
+
+let allCustomerReviews = [];
+let showAllReviews = false;
+
+const REVIEWS_TO_SHOW = 3;
 
 async function loadReviews() {
-
   try {
-
     const response = await fetch(REVIEW_API);
 
     if (!response.ok) {
@@ -2076,76 +2146,158 @@ async function loadReviews() {
 
     const reviews = await response.json();
 
+    // Store all reviews
+    allCustomerReviews = reviews;
+
+    // Reset to first 3 reviews whenever reviews reload
+    showAllReviews = false;
+
+    displayReviews();
+
+  } catch (error) {
+    console.error("Load reviews error:", error);
+
     reviewList.replaceChildren();
 
-    if (!reviews.length) {
+    const errorBox = document.createElement("div");
+    errorBox.className = "review-empty";
+    errorBox.textContent = "Unable to load reviews right now.";
 
-      const empty = document.createElement("div");
+    reviewList.appendChild(errorBox);
+  }
+}
 
-      empty.className = "review-empty";
-      empty.textContent =
-        "No reviews yet. Be the first to leave a review! ⭐";
 
-      reviewList.appendChild(empty);
+/* =========================================
+   DISPLAY REVIEWS
+   ========================================= */
 
-      return;
+function displayReviews() {
+  reviewList.replaceChildren();
+
+  // No reviews
+  if (!allCustomerReviews.length) {
+    const empty = document.createElement("div");
+
+    empty.className = "review-empty";
+    empty.textContent =
+      "No reviews yet. Be the first to leave a review! ⭐";
+
+    reviewList.appendChild(empty);
+
+    return;
+  }
+
+  // Show only 3 reviews initially
+  const reviewsToDisplay = showAllReviews
+    ? allCustomerReviews
+    : allCustomerReviews.slice(0, REVIEWS_TO_SHOW);
+
+
+  /* ---------- REVIEW CARDS ---------- */
+
+  reviewsToDisplay.forEach((review) => {
+
+    const card = document.createElement("article");
+    card.className = "customer-review";
+
+
+    // Top section
+    const top = document.createElement("div");
+    top.className = "customer-review-top";
+
+
+    // Customer name
+    const name = document.createElement("div");
+    name.className = "customer-review-name";
+    name.textContent = review.name;
+
+
+    // Stars
+    const stars = document.createElement("div");
+    stars.className = "customer-review-stars";
+
+    stars.textContent =
+      "★".repeat(review.rating) +
+      "☆".repeat(5 - review.rating);
+
+
+    // Review comment
+    const comment = document.createElement("p");
+    comment.textContent = review.comment;
+
+
+    // Add elements
+    top.appendChild(name);
+    top.appendChild(stars);
+
+    card.appendChild(top);
+    card.appendChild(comment);
+
+    reviewList.appendChild(card);
+  });
+
+
+  /* =========================================
+     VIEW ALL / SHOW LESS BUTTON
+     ========================================= */
+
+  if (allCustomerReviews.length > REVIEWS_TO_SHOW) {
+
+    const buttonWrapper = document.createElement("div");
+    buttonWrapper.className = "review-view-more-wrapper";
+
+
+    const viewButton = document.createElement("button");
+
+    viewButton.type = "button";
+    viewButton.className = "review-view-more-btn";
+
+
+    // Button text
+    if (showAllReviews) {
+
+      viewButton.innerHTML =
+        '<i class="fa-solid fa-chevron-up"></i> Show Less';
+
+    } else {
+
+      const remainingReviews =
+        allCustomerReviews.length - REVIEWS_TO_SHOW;
+
+      viewButton.innerHTML =
+        `<i class="fa-solid fa-chevron-down"></i>
+         View All Reviews (${remainingReviews} more)`;
     }
 
-    reviews.forEach((review) => {
 
-      const card = document.createElement("article");
-      card.className = "customer-review";
+    // Button click
+    viewButton.addEventListener("click", () => {
 
-      const top = document.createElement("div");
-      top.className = "customer-review-top";
+      showAllReviews = !showAllReviews;
 
-      const name = document.createElement("div");
-      name.className = "customer-review-name";
+      displayReviews();
 
-      // Safe customer content
-      name.textContent = review.name;
 
-      const stars = document.createElement("div");
-      stars.className = "customer-review-stars";
-      stars.textContent =
-        "★".repeat(review.rating) +
-        "☆".repeat(5 - review.rating);
+      // When Show Less clicked,
+      // return smoothly to reviews section
+      if (!showAllReviews) {
 
-      const comment = document.createElement("p");
-
-      // Safe customer content
-      comment.textContent = review.comment;
-
-      top.appendChild(name);
-      top.appendChild(stars);
-
-      card.appendChild(top);
-      card.appendChild(comment);
-
-      reviewList.appendChild(card);
+        document
+          .getElementById("reviews")
+          ?.scrollIntoView({
+            behavior: "smooth",
+            block: "start"
+          });
+      }
 
     });
 
-  } catch (error) {
 
-    console.error(
-      "Load reviews error:",
-      error
-    );
+    buttonWrapper.appendChild(viewButton);
 
-    reviewList.replaceChildren();
-
-    const errorBox =
-      document.createElement("div");
-
-    errorBox.className = "review-empty";
-    errorBox.textContent =
-      "Unable to load reviews right now.";
-
-    reviewList.appendChild(errorBox);
-
+    reviewList.appendChild(buttonWrapper);
   }
-
 }
 
 
